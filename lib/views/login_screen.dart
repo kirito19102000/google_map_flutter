@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../controllers/sakai_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   static const route = '/login';
@@ -12,11 +12,14 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<StatefulWidget>{
   final formKey = GlobalKey<FormState>();
+  final SakaiController _controller = SakaiController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
   late String emailAddress;
   late String password;
-
+  late String server;
+  String authMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +90,23 @@ class LoginScreenState extends State<StatefulWidget>{
             formKey.currentState!.save();
 
             print('$emailAddress, $password');
+            dynamic authResponse =
+            await _controller.authenticate(emailAddress, password);
+            print(authResponse.statusCode);
+
+            if (authResponse.statusCode == 201 ||
+                authResponse.statusCode == 200) {
+              authMessage = '';
+              setState(() {});
+            } else {
+              print('Authentication failed.');
+              setState(() {});
+            }
           }
         },
         child: Text('Login')
     );
   }
 
-  void validate() {
 
-  }
 }
