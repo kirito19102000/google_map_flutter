@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controllers/sakai_controller.dart';
+import 'map_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const route = '/login';
@@ -96,6 +97,10 @@ class LoginScreenState extends State<StatefulWidget>{
 
             if (authResponse.statusCode == 201 ||
                 authResponse.statusCode == 200) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MapScreen()));
               authMessage = '';
               setState(() {});
             } else {

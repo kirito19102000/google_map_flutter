@@ -8,7 +8,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Login to gg map',
       home: Scaffold(
-        body: MapScreen(),
+        body: LoginScreen(),
       ),
     );
   }
