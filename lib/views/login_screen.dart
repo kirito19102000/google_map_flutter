@@ -31,9 +31,9 @@ class LoginScreenState extends State<StatefulWidget>{
       key: formKey,
       child: Column(
         children: [
-          Text("Username",textScaleFactor: 2 ,),
+          Align(alignment: Alignment.centerLeft, child: new Text("Username",textScaleFactor: 1.75 ),),
           emailField(),
-          Text("Password",textScaleFactor: 2 ,),
+          Align(alignment: Alignment.centerLeft, child: new Text("Password",textScaleFactor: 1.75),),
           passwordField(),
           loginButton()
         ],
@@ -82,8 +82,15 @@ class LoginScreenState extends State<StatefulWidget>{
 
   Widget loginButton() {
     return ElevatedButton(
-        onPressed: validate,
-        child: Text('Login'));
+        onPressed: () async {
+          if (formKey.currentState!.validate()) {
+            formKey.currentState!.save();
+
+            print('$emailAddress, $password');
+          }
+        },
+        child: Text('Login')
+    );
   }
 
   void validate() {
